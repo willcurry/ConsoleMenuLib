@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.ArrayList;
 
-public class ConsoleMenu {
+public class ConsoleMenu<E> {
     private ArrayList<MenuItem> items;
     private final InputStream stream;
     private final BufferedReader inputReader;
@@ -23,7 +23,7 @@ public class ConsoleMenu {
         return null;
     }
 
-    public void userSelectItem(String arg) {
+    public void userSelectItem(E arg) {
         String input = userInput();
         for (MenuItem item : items) {
              if (input.equals(item.name())) {

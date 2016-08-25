@@ -35,7 +35,7 @@ public class ConsoleMenuTests {
     public void itemsHaveNames() {
         ArrayList<MenuItem> items = new ArrayList<>();
         items.add(item);
-        ConsoleMenu consoleMenu = new ConsoleMenu(items, inputStream, writer);
+        ConsoleMenu<String> consoleMenu = new ConsoleMenu(items, inputStream, writer);
         assertThat(consoleMenu.getItems().get(0).name(), is("Test"));
     }
 
@@ -61,7 +61,7 @@ public class ConsoleMenuTests {
     public void canExecuteItems() {
         ArrayList<MenuItem> items = new ArrayList<>();
         items.add(item);
-        ConsoleMenu consoleMenu = new ConsoleMenu(items, inputStream, writer);
+        ConsoleMenu<String> consoleMenu = new ConsoleMenu(items, inputStream, writer);
         consoleMenu.getItems().get(0).execute("Test2");
         assertThat(consoleMenu.getItems().get(0).name(), is("Test2"));
     }
@@ -72,7 +72,7 @@ public class ConsoleMenuTests {
         MenuItem item2 = new TestItem("AnotherItem");
         items.add(item);
         items.add(item2);
-        ConsoleMenu consoleMenu = new ConsoleMenu(items, inputStream, writer);
+        ConsoleMenu<String> consoleMenu = new ConsoleMenu(items, inputStream, writer);
         consoleMenu.userSelectItem("Test2");
         assertThat(consoleMenu.getItems().get(0).name(), is("Test2"));
     }
