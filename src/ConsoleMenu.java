@@ -1,14 +1,14 @@
 import java.io.*;
 import java.util.ArrayList;
 
-public class ConsoleMenu<E> {
-    private ArrayList<MenuItem> items;
+public class ConsoleMenu {
+    private ArrayList<Command> commands;
     private final InputStream stream;
     private final BufferedReader inputReader;
     private final Writer writer;
 
-    public ConsoleMenu(ArrayList<MenuItem> items, InputStream stream, Writer writer) {
-        this.items = items;
+    public ConsoleMenu(ArrayList<Command> commands, InputStream stream, Writer writer) {
+        this.commands = commands;
         this.stream = stream;
         this.writer = writer;
         inputReader = new BufferedReader(new InputStreamReader(stream));
@@ -23,24 +23,24 @@ public class ConsoleMenu<E> {
         return null;
     }
 
-    public void userSelectItem(E arg) {
-        String input = userInput();
-        for (MenuItem item : items) {
-             if (input.equals(item.name())) {
-                item.execute(arg);
-             }
-        }
+    public ArrayList<Command> getCommands() {
+        return commands;
     }
 
-    public ArrayList<MenuItem> getItems() {
-        return this.items;
+    public void userSelectCommand() {
+        String userInput = userInput();
+        for (Command command : commands) {
+            if (userInput.equals(command.name())) {
+                command.execute();
+            }
+        }
     }
 
     public void displayItems() {
-        for (MenuItem item : items) {
-            print(items.indexOf(item) + ") " + item.name());
+        for (Command command : commands) {
+            print(commands.indexOf(command) + ") " + command.name());
         }
-        print(items.size() + ") Quit");
+        print(commands.size() + ") Quit");
     }
 
     private void print(String text) {
