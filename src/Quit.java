@@ -1,11 +1,7 @@
 public class Quit implements Command {
 
-    private final String name;
-    private boolean hasQuit = false;
-
-    public Quit(String name) {
-        this.name = name;
-    }
+    private final String name = "Quit";
+    public boolean hasQuit = false;
 
     @Override
     public void execute() {
