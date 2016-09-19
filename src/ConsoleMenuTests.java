@@ -61,7 +61,6 @@ public class ConsoleMenuTests {
     public void canExecuteCommands() {
         ArrayList<Command> commands = new ArrayList<>();
         commands.add(command);
-        ConsoleMenu consoleMenu = new ConsoleMenu(commands, inputStream, writer);
         command.execute();
         assertThat(command.name(), is("newName"));
     }

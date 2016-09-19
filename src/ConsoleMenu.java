@@ -9,6 +9,7 @@ public class ConsoleMenu {
 
     public ConsoleMenu(ArrayList<Command> commands, InputStream stream, Writer writer) {
         this.commands = commands;
+        commands.add(new Quit("Quit"));
         this.stream = stream;
         this.writer = writer;
         inputReader = new BufferedReader(new InputStreamReader(stream));
@@ -40,7 +41,6 @@ public class ConsoleMenu {
         for (Command command : commands) {
             print(commands.indexOf(command) + ") " + command.name());
         }
-        print(commands.size() + ") Quit");
     }
 
     private void print(String text) {
