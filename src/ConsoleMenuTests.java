@@ -49,15 +49,6 @@ public class ConsoleMenuTests {
     }
 
     @Test
-    public void quitIsTheLastItemAndHasTheLastID() {
-        ArrayList<Command> commands = new ArrayList<>();
-        commands.add(command);
-        ConsoleMenu consoleMenu = new ConsoleMenu(commands, inputStream, writer);
-        consoleMenu.displayItems();
-        assertThat(output.toString(), containsString("1) Quit"));
-    }
-
-    @Test
     public void canExecuteCommands() {
         ArrayList<Command> commands = new ArrayList<>();
         commands.add(command);
