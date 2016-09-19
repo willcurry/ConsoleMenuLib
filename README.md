@@ -5,6 +5,7 @@ A console menu library for Java following the Command pattern.
 Import JAR into your external libaries.
 
 #Example
+```
 public class DummyCommand implements Command{
     @Override
     public void execute() {
@@ -15,3 +16,4 @@ public class DummyCommand implements Command{
 Command dummy = new DummyCommand();
 dummy.execute(); 
 -> "Hi, I am a dummy."
+```
