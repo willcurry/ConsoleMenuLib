@@ -13,67 +13,52 @@ public class ConsoleMenuTests {
     private Writer writer;
     private ByteArrayOutputStream output;
     private InputStream inputStream;
-    private MenuItem item;
+    private Command command;
+    ArrayList<Command> commands;
 
     @Before
     public void setUp() throws Exception {
         output = new ByteArrayOutputStream();
         writer = new PrintWriter(output);
         inputStream = new ByteArrayInputStream("Test".getBytes());
-        item = new TestItem("Test");
+        command = new DummyCommand("Test");
+        commands = new ArrayList<>();
     }
 
     @Test
     public void menuHasItems() {
-        ArrayList<MenuItem> items = new ArrayList<>();
-        items.add(item);
-        ConsoleMenu consoleMenu = new ConsoleMenu(items, inputStream, writer);
-        assertThat(consoleMenu.getItems(), is(items));
+        commands.add(command);
+        ConsoleMenu consoleMenu = new ConsoleMenu(commands, inputStream, writer);
+        assertThat(consoleMenu.getCommands(), is(commands));
     }
 
     @Test
     public void itemsHaveNames() {
-        ArrayList<MenuItem> items = new ArrayList<>();
-        items.add(item);
-        ConsoleMenu<String> consoleMenu = new ConsoleMenu(items, inputStream, writer);
-        assertThat(consoleMenu.getItems().get(0).name(), is("Test"));
+        commands.add(command);
+        ConsoleMenu consoleMenu = new ConsoleMenu(commands, inputStream, writer);
+        assertThat(consoleMenu.getCommands().get(0).name(), is("Test"));
     }
 
     @Test
     public void itemsDisplayTheirIDAndName() {
-        ArrayList<MenuItem> items = new ArrayList<>();
-        items.add(item);
-        ConsoleMenu consoleMenu = new ConsoleMenu(items, inputStream, writer);
+        commands.add(command);
+        ConsoleMenu consoleMenu = new ConsoleMenu(commands, inputStream, writer);
         consoleMenu.displayItems();
         assertThat(output.toString(), containsString("0) Test"));
     }
 
     @Test
-    public void quitIsTheLastItemAndHasTheLastID() {
-        ArrayList<MenuItem> items = new ArrayList<>();
-        items.add(item);
-        ConsoleMenu consoleMenu = new ConsoleMenu(items, inputStream, writer);
-        consoleMenu.displayItems();
-        assertThat(output.toString(), containsString("1) Quit"));
-    }
-
-    @Test
-    public void canExecuteItems() {
-        ArrayList<MenuItem> items = new ArrayList<>();
-        items.add(item);
-        ConsoleMenu<String> consoleMenu = new ConsoleMenu(items, inputStream, writer);
-        consoleMenu.getItems().get(0).execute("Test2");
-        assertThat(consoleMenu.getItems().get(0).name(), is("Test2"));
+    public void canExecuteCommands() {
+        commands.add(command);
+        command.execute();
+        assertThat(command.name(), is("newName"));
     }
 
     @Test
     public void itemsExecuteWhenSelectedByUser() {
-        ArrayList<MenuItem> items = new ArrayList<>();
-        MenuItem item2 = new TestItem("AnotherItem");
-        items.add(item);
-        items.add(item2);
-        ConsoleMenu<String> consoleMenu = new ConsoleMenu(items, inputStream, writer);
-        consoleMenu.userSelectItem("Test2");
-        assertThat(consoleMenu.getItems().get(0).name(), is("Test2"));
+        commands.add(command);
+        ConsoleMenu consoleMenu = new ConsoleMenu(commands, inputStream, writer);
+        consoleMenu.userSelectCommand();
+        assertThat(command.name(), is("newName"));
     }
 }
