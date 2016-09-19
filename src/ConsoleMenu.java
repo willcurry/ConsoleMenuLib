@@ -6,12 +6,15 @@ public class ConsoleMenu {
     private final InputStream stream;
     private final BufferedReader inputReader;
     private final Writer writer;
+    private final Quit quit;
 
     public ConsoleMenu(ArrayList<Command> commands, InputStream stream, Writer writer) {
         this.commands = commands;
         this.stream = stream;
         this.writer = writer;
         inputReader = new BufferedReader(new InputStreamReader(stream));
+        quit = new Quit();
+        commands.add(quit);
     }
 
     public String userInput() {
@@ -33,6 +36,13 @@ public class ConsoleMenu {
             if (userInput.equals(command.name())) {
                 command.execute();
             }
+        }
+    }
+
+    public void runMenu() {
+        while (!quit.hasQuit()) {
+            displayItems();
+            userSelectCommand();
         }
     }
 
