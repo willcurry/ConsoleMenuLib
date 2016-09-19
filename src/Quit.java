@@ -1,7 +1,7 @@
 public class Quit implements Command {
 
     private final String name = "Quit";
-    public boolean hasQuit = false;
+    private boolean hasQuit = false;
 
     @Override
     public void execute() {
@@ -11,5 +11,9 @@ public class Quit implements Command {
     @Override
     public String name() {
         return name;
+    }
+
+    public boolean hasQuit() {
+        return hasQuit;
     }
 }
