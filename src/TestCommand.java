@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 public class TestCommand implements Command {
 
     private String name;
