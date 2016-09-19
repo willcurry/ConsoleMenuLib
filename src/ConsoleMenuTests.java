@@ -20,7 +20,7 @@ public class ConsoleMenuTests {
         output = new ByteArrayOutputStream();
         writer = new PrintWriter(output);
         inputStream = new ByteArrayInputStream("Test".getBytes());
-        command = new TestCommand("Test");
+        command = new DummyCommand("Test");
     }
 
     @Test

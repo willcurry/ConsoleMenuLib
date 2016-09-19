@@ -1,8 +1,8 @@
-public class TestCommand implements Command {
+public class DummyCommand implements Command {
 
     private String name;
 
-    public TestCommand(String name) {
+    public DummyCommand(String name) {
         this.name = name;
     }
 
