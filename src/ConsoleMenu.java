@@ -3,14 +3,12 @@ import java.util.ArrayList;
 
 public class ConsoleMenu {
     private ArrayList<Command> commands;
-    private final InputStream stream;
     private final BufferedReader inputReader;
     private final Writer writer;
     private final Quit quit;
 
     public ConsoleMenu(ArrayList<Command> commands, InputStream stream, Writer writer) {
         this.commands = commands;
-        this.stream = stream;
         this.writer = writer;
         inputReader = new BufferedReader(new InputStreamReader(stream));
         quit = new Quit();
@@ -44,6 +42,10 @@ public class ConsoleMenu {
             displayItems();
             userSelectCommand();
         }
+    }
+
+    public void addCommands(ArrayList<Command> commands) {
+        this.commands.addAll(commands);
     }
 
     public void displayItems() {

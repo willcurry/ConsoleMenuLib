@@ -14,6 +14,7 @@ public class ConsoleMenuTests {
     private ByteArrayOutputStream output;
     private InputStream inputStream;
     private Command command;
+    ArrayList<Command> commands;
 
     @Before
     public void setUp() throws Exception {
@@ -21,11 +22,11 @@ public class ConsoleMenuTests {
         writer = new PrintWriter(output);
         inputStream = new ByteArrayInputStream("Test".getBytes());
         command = new DummyCommand("Test");
+        commands = new ArrayList<>();
     }
 
     @Test
     public void menuHasItems() {
-        ArrayList<Command> commands = new ArrayList<>();
         commands.add(command);
         ConsoleMenu consoleMenu = new ConsoleMenu(commands, inputStream, writer);
         assertThat(consoleMenu.getCommands(), is(commands));
@@ -33,7 +34,6 @@ public class ConsoleMenuTests {
 
     @Test
     public void itemsHaveNames() {
-        ArrayList<Command> commands = new ArrayList<>();
         commands.add(command);
         ConsoleMenu consoleMenu = new ConsoleMenu(commands, inputStream, writer);
         assertThat(consoleMenu.getCommands().get(0).name(), is("Test"));
@@ -41,7 +41,6 @@ public class ConsoleMenuTests {
 
     @Test
     public void itemsDisplayTheirIDAndName() {
-        ArrayList<Command> commands = new ArrayList<>();
         commands.add(command);
         ConsoleMenu consoleMenu = new ConsoleMenu(commands, inputStream, writer);
         consoleMenu.displayItems();
@@ -50,7 +49,6 @@ public class ConsoleMenuTests {
 
     @Test
     public void canExecuteCommands() {
-        ArrayList<Command> commands = new ArrayList<>();
         commands.add(command);
         command.execute();
         assertThat(command.name(), is("newName"));
@@ -58,7 +56,6 @@ public class ConsoleMenuTests {
 
     @Test
     public void itemsExecuteWhenSelectedByUser() {
-        ArrayList<Command> commands = new ArrayList<>();
         commands.add(command);
         ConsoleMenu consoleMenu = new ConsoleMenu(commands, inputStream, writer);
         consoleMenu.userSelectCommand();
